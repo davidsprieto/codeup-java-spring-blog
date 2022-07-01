@@ -43,7 +43,7 @@ public class PostController {
     public String postsIndex(Model model) {
         ArrayList<Post> posts = new ArrayList<>();
         Post post2 = new Post("Friday", "Tomorrow is Friday.");
-        Post post3 = new Post("Saturday", "The day after tomorrow is Saturday");
+        Post post3 = new Post("Saturday", "The day after tomorrow is Saturday.");
         posts.add(post2);
         posts.add(post3);
 
