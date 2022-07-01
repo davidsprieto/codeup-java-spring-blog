@@ -39,13 +39,6 @@ public class PostController {
 
 //    Spring - Fundamentals: Views Exercises
 
-    @GetMapping ("/posts/{id}")
-    public String viewIndividualPost(@PathVariable int id, Model model) {
-        Post post1 = new Post("Thursday", "Today is Thursday.");
-        model.addAttribute("post", post1);
-        return "posts/show";
-    }
-
     @GetMapping("/posts")
     public String postsIndex(Model model) {
         ArrayList<Post> posts = new ArrayList<>();
@@ -57,6 +50,13 @@ public class PostController {
         model.addAttribute("posts", posts);
 
         return "posts/index";
+    }
+
+    @GetMapping ("/posts/{id}")
+    public String viewIndividualPost(@PathVariable int id, Model model) {
+        Post post1 = new Post("Thursday", "Today is Thursday.");
+        model.addAttribute("post", post1);
+        return "posts/show";
     }
 
 }
