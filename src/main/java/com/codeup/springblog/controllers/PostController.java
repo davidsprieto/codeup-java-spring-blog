@@ -1,8 +1,10 @@
 package com.codeup.springblog.controllers;
 
+import com.codeup.springblog.models.Post;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class PostController {
@@ -36,8 +38,10 @@ public class PostController {
 //    Spring - Fundamentals: Views Exercises
 
     @GetMapping ("/posts/{id}")
-    public String viewIndividualPost() {
-
+    public String viewIndividualPost(@PathVariable int id, Model model) {
+        Post post = new Post("Thursday", "Today is thursday");
+        model.addAttribute("post", post);
+        return "posts/show";
     }
 
 }
