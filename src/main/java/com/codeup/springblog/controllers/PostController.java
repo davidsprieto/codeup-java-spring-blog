@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.ArrayList;
+
 @Controller
 public class PostController {
 
@@ -39,9 +41,22 @@ public class PostController {
 
     @GetMapping ("/posts/{id}")
     public String viewIndividualPost(@PathVariable int id, Model model) {
-        Post post = new Post("Thursday", "Today is thursday");
-        model.addAttribute("post", post);
+        Post post1 = new Post("Thursday", "Today is Thursday.");
+        model.addAttribute("post", post1);
         return "posts/show";
+    }
+
+    @GetMapping("/posts")
+    public String postsIndex(Model model) {
+        ArrayList<Post> posts = new ArrayList<>();
+        Post post2 = new Post("Friday", "Tomorrow is Friday.");
+        Post post3 = new Post("Saturday", "The day after tomorrow is Saturday");
+        posts.add(post2);
+        posts.add(post3);
+
+        model.addAttribute("posts", posts);
+
+        return "posts/index";
     }
 
 }
