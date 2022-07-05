@@ -1,6 +1,7 @@
 package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.Post;
+import com.codeup.springblog.models.User;
 import com.codeup.springblog.repositories.PostRepository;
 import com.codeup.springblog.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
@@ -77,8 +78,10 @@ public class PostController {
 
     @PostMapping("/posts/create")
     public String createPost(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body, Post newPost) {
+        User user = usersRepository.getById(1L);
         newPost.setTitle(title);
         newPost.setBody(body);
+        newPost.setUser(user);
         postsRepository.save(newPost);
         return "redirect:/posts";
     }
