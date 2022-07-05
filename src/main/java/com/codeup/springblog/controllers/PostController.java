@@ -2,6 +2,7 @@ package com.codeup.springblog.controllers;
 
 import com.codeup.springblog.models.Post;
 import com.codeup.springblog.repositories.PostRepository;
+import com.codeup.springblog.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -60,10 +61,13 @@ public class PostController {
 //    }
 
     private final PostRepository postsRepository;
+    private final UserRepository usersRepository;
 
-    public PostController(PostRepository postsRepository) {
+    public PostController(PostRepository postsRepository, UserRepository usersRepository) {
         this.postsRepository = postsRepository;
+        this.usersRepository = usersRepository;
     }
+
 
     @GetMapping("/posts")
     public String postsIndex(Model model) {
