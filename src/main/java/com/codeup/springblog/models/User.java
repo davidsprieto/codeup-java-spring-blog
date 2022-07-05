@@ -20,7 +20,7 @@ public class User {
     @Column(length = 50, nullable = false)
     private String password;
 
-    @OneToMany (mappedBy = "user")
+    @OneToMany (cascade = CascadeType.ALL, mappedBy = "user")
     private List<Post> posts;
 
     public User() {}
