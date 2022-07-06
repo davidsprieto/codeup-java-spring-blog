@@ -7,9 +7,9 @@ import com.codeup.springblog.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class PostController {
@@ -61,6 +61,27 @@ public class PostController {
 //        model.addAttribute("post", post1);
 //        return "posts/show";
 //    }
+//
+//    End of Spring - Fundamentals: Views Exercises
+//
+////    OLD postForm() METHOD
+//    @GetMapping("/posts/create")
+//    public String postForm() {
+//        return "posts/create";
+//    }
+
+////    OLD createPost() METHOD
+//    @PostMapping("/posts/create")
+//    public String createPost(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body) {
+//        Post newPost = new Post();
+//        User user = usersRepository.getById(1L);
+//        newPost.setTitle(title);
+//        newPost.setBody(body);
+//        newPost.setUser(user);
+//        postsRepository.save(newPost);
+//        return "redirect:/posts";
+//    }
+
 
     private final PostRepository postsRepository;
     private final UserRepository usersRepository;
@@ -70,20 +91,24 @@ public class PostController {
         this.usersRepository = usersRepository;
     }
 
-
     @GetMapping("/posts")
     public String postsIndex(Model model) {
         model.addAttribute("posts", postsRepository.findAll());
         return "posts/index";
     }
 
+//  NEW postForm() METHOD
+    @GetMapping("/posts/create")
+    public String postForm(Model model) {
+        model.addAttribute("post", new Post());
+        return "posts/create";
+    }
+
     @PostMapping("/posts/create")
-    public String createPost(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body, Post newPost) {
+    public String createPost(@ModelAttribute Post post) {
         User user = usersRepository.getById(1L);
-        newPost.setTitle(title);
-        newPost.setBody(body);
-        newPost.setUser(user);
-        postsRepository.save(newPost);
+        post.setUser(user);
+        postsRepository.save(post);
         return "redirect:/posts";
     }
 

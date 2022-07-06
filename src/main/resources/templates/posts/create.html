@@ -6,16 +6,30 @@
 </head>
 <body>
 
-    <form action="/posts/create" method="post">
-        <div>
-            <label for="title">Title of Post:</label>
-            <input id="title" name="title" type="text">
-        </div>
-        <div>
-            <label for="body">Body of Post:</label>
-            <input id="body" name="body" type="text">
-        </div>
-        <button>POST</button>
+    <!-- Standard HTML Form: -->
+
+<!--    <form action="/posts/create" method="post">-->
+<!--        <div>-->
+<!--            <label for="title">Title of Post:</label>-->
+<!--            <input id="title" name="title" type="text">-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <label for="body">Body of Post:</label>-->
+<!--            <input id="body" name="body" type="text">-->
+<!--        </div>-->
+<!--        <button>POST</button>-->
+<!--    </form>-->
+
+    <!-- Spring HTML Form Utilizing Form Model Binding: -->
+
+    <form th:action="@{/posts/create}" th:method="post" th:object="${post}">
+        Title:
+        <input th:field="*{title}" />
+        <br />
+        Body:
+        <input th:field="*{body}" />
+        <br />
+        <input type="submit" />
     </form>
 
 </body>
