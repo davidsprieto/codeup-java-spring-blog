@@ -7,6 +7,7 @@ import com.codeup.springblog.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -86,5 +87,11 @@ public class PostController {
         return "redirect:/posts";
     }
 
+    @GetMapping ("/posts/{id}")
+    public String viewIndividualPost(@PathVariable long id, Model model) {
+        User user = usersRepository.getById(1L);
+        model.addAttribute("user", user);
+        return "posts/show";
+    }
 
 }
