@@ -2,13 +2,29 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Show</title>
+    <title>Show a Post</title>
 </head>
-<body>
+<body style="text-align: center">
 
-<!--    <h1 th:text="${post.title}"></h1>-->
-<!--    <h1 th:text="${post.body}"></h1>-->
-    <h1 th:text="${user.email}"></h1>
+<div class="container">
+    <h1>View your Posts</h1>
+</div>
+
+<div class="container">
+    Email:
+    <span th:text="${user.email}"></span>
+</div>
+
+<br />
+
+<div class="container" th:each="post : ${posts}">
+    Title:
+    <a th:text="${post.title}"></a>
+    <br />
+    Body:
+    <textarea th:text="${post.body}"></textarea>
+    <br />
+</div>
 
 </body>
 </html>

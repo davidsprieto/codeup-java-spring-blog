@@ -99,7 +99,7 @@ public class PostController {
 
 //  NEW postForm() METHOD
     @GetMapping("/posts/create")
-    public String postForm(Model model) {
+    public String createPostForm(Model model) {
         model.addAttribute("post", new Post());
         return "posts/create";
     }
@@ -116,7 +116,23 @@ public class PostController {
     public String viewIndividualPost(@PathVariable long id, Model model) {
         User user = usersRepository.getById(1L);
         model.addAttribute("user", user);
+        Post post = postsRepository.getById(id);
+        model.addAttribute("posts", post);
         return "posts/show";
+    }
+
+    @GetMapping("posts/{id}/edit")
+    public String editPostForm(@PathVariable long id, Model model) {
+        model.addAttribute("post", postsRepository.getById(id));
+        return "posts/edit";
+    }
+
+    @PostMapping("posts/{id}/edit")
+    public String editPost(@PathVariable long id, @ModelAttribute Post post) {
+        User user = usersRepository.getById(1L);
+        post.setUser(user);
+        postsRepository.save(post);
+        return "redirect:/posts";
     }
 
 }

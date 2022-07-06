@@ -2,26 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Create a Post</title>
+    <title>Edit a Post</title>
 </head>
 <body style="text-align: center">
 
 <div class="container">
-    <h1>Create a Post</h1>
+    <h1>Edit a Post</h1>
 </div>
 
-    <!-- Spring HTML Form Utilizing Form Model Binding: -->
 <div class="container">
-    <form th:action="@{/posts/create}" th:method="post" th:object="${post}">
+    <form th:action="@{posts/{id}/edit(id=${post.id})}" th:method="post" th:object="${post}">
         Title:
         <input th:field="*{title}" />
         <br />
         Body:
         <textarea th:field="*{body}"></textarea>
         <br />
-        <input type="submit" />
+        <input type="submit"/>
     </form>
-<div>
+</div>
 
 </body>
 </html>

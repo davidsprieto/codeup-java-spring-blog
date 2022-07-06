@@ -2,14 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Index</title>
+    <title>Index - View all Posts</title>
 </head>
-<body>
+<body style="text-align: center">
 
-    <div th:each="post : ${posts}">
-        <h1 th:text="${post.title}"></h1>
-        <h4 th:text="${post.body}"></h4>
-    </div>
+<div class="container">
+    <h1>All Posts</h1>
+</div>
+
+<div class="container" th:each="post : ${posts}">
+    <h3 th:text="${post.title}"></h3>
+    <textarea th:text="${post.body}"></textarea>
+</div>
 
 </body>
 </html>
