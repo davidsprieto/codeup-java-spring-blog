@@ -4,6 +4,7 @@ import com.codeup.springblog.models.Post;
 import com.codeup.springblog.models.User;
 import com.codeup.springblog.repositories.PostRepository;
 import com.codeup.springblog.repositories.UserRepository;
+import com.codeup.springblog.services.EmailService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -69,7 +70,7 @@ public class PostController {
 //    public String postForm() {
 //        return "posts/create";
 //    }
-
+//
 ////    OLD createPost() METHOD
 //    @PostMapping("/posts/create")
 //    public String createPost(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body) {
@@ -85,10 +86,12 @@ public class PostController {
 
     private final PostRepository postsRepository;
     private final UserRepository usersRepository;
+    private final EmailService emailService;
 
-    public PostController(PostRepository postsRepository, UserRepository usersRepository) {
+    public PostController(PostRepository postsRepository, UserRepository usersRepository, EmailService emailService) {
         this.postsRepository = postsRepository;
         this.usersRepository = usersRepository;
+        this.emailService = emailService;
     }
 
     @GetMapping("/posts")
@@ -108,7 +111,11 @@ public class PostController {
     public String createPost(@ModelAttribute Post post) {
         User user = usersRepository.getById(1L);
         post.setUser(user);
-        postsRepository.save(post);
+        Post savedPost = postsRepository.save(post);
+
+        String subject = "New Post Created: " + savedPost.getTitle();
+        String body = "Hello, " + savedPost.getUser().getUsername() + "! Thank you for posting! Your post number is: " + savedPost.getId() + ".";
+        emailService.prepareAndSend(savedPost, subject, body);
         return "redirect:/posts";
     }
 
