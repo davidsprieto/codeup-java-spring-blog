@@ -133,6 +133,12 @@ public class PostController {
         return "redirect:/posts";
     }
 
-
+    @GetMapping("posts/profile")
+    public String profileView(Model model) {
+        User user = usersRepository.getById(1L);
+        model.addAttribute("user", user);
+        model.addAttribute("posts", postsRepository.findAllByUserId(user.getId()));
+        return "posts/profile";
+    }
 
 }

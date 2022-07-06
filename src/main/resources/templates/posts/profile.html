@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+</head>
+<body style="text-align: center">
+
+<div class="container">
+    <h1 th:text="'Here is your profile, ' + ${user.username} + '!'"></h1>
+</div>
+
+<div class="container">
+    <h2>Here are all your posts!</h2>
+</div>
+
+<div th:each="post : ${posts}">
+    <a th:text="${post.title}"></a>
+    <p th:text="${post.body}"></p>
+</div>
+
+</body>
+</html>

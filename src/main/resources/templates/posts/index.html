@@ -11,8 +11,8 @@
 </div>
 
 <div class="container" th:each="post : ${posts}">
-    <h3 th:text="${post.title}"></h3>
-    <textarea th:text="${post.body}"></textarea>
+    <a th:text="${post.title}" th:href="@{|/posts/${post.id}|}"></a>
+    <p th:text="${post.body}"></p>
 </div>
 
 </body>

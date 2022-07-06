@@ -14,13 +14,12 @@
 
 <div class="container">
     Title:
-    <span th:text="${post.title}"></span>
+    <h3 th:text="${post.title}"></h3>
     <br />
     Body:
-    <textarea th:text="${post.body}"></textarea>
+    <p th:text="${post.body}"></p>
     <br />
-    Posted by:
-    <span th:text="${post.user.email}"></span>
+    <p th:text="'Post by: ' + ${post.user.email}"></p>
 </div>
 
 </body>
