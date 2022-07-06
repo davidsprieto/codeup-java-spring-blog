@@ -7,23 +7,20 @@
 <body style="text-align: center">
 
 <div class="container">
-    <h1>View your Posts</h1>
-</div>
-
-<div class="container">
-    Email:
-    <span th:text="${user.email}"></span>
+    <h1>View a Single Post</h1>
 </div>
 
 <br />
 
-<div class="container" th:each="post : ${posts}">
+<div class="container">
     Title:
-    <a th:text="${post.title}"></a>
+    <span th:text="${post.title}"></span>
     <br />
     Body:
     <textarea th:text="${post.body}"></textarea>
     <br />
+    Posted by:
+    <span th:text="${post.user.email}"></span>
 </div>
 
 </body>

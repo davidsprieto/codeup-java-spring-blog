@@ -114,10 +114,8 @@ public class PostController {
 
     @GetMapping ("/posts/{id}")
     public String viewIndividualPost(@PathVariable long id, Model model) {
-        User user = usersRepository.getById(1L);
-        model.addAttribute("user", user);
         Post post = postsRepository.getById(id);
-        model.addAttribute("posts", post);
+        model.addAttribute("post", post);
         return "posts/show";
     }
 
@@ -134,5 +132,7 @@ public class PostController {
         postsRepository.save(post);
         return "redirect:/posts";
     }
+
+
 
 }
