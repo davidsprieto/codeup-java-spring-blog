@@ -11,7 +11,7 @@ public class HomeController {
     @GetMapping("/")
     @ResponseBody
     public String landingPage() {
-        return "This is the landing page!";
+        return "<div style='text-align: center;'>This is the landing page!<div>";
     }
 
     // Path Variable

@@ -25,19 +25,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .userDetailsService(usersLoader) // How to find users by their username
-                .passwordEncoder(passwordEncoder()) // How to encode and verify passwords
+        auth.userDetailsService(usersLoader) // How to find users by their username
+            .passwordEncoder(passwordEncoder()) // How to encode and verify passwords
         ;
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                /* Login configuration */
-                .formLogin()
+        /* Login configuration */
+        http.formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/ads") // user's home page, it can be any URL
+                .defaultSuccessUrl("/") // user's home page, it can be any URL
                 .permitAll() // Anyone can go to the login page
                 /* Logout configuration */
                 .and()
@@ -46,14 +44,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 /* Pages that can be viewed without having to log in */
                 .and()
                 .authorizeRequests()
-                .antMatchers("/", "/ads") // anyone can see the home and the ads pages
+                .antMatchers("/","/sign-up" ,"/posts") // anyone can see the home page("/"), the sign-up page("/sign-up"), and the posts page("/posts")
                 .permitAll()
                 /* Pages that require authentication */
                 .and()
                 .authorizeRequests()
                 .antMatchers(
-                        "/ads/create", // only authenticated users can create ads
-                        "/ads/{id}/edit" // only authenticated users can edit ads
+                        "/posts/*" // only authenticated users can access every endpoint that begins with "/posts"
                 )
                 .authenticated()
         ;
