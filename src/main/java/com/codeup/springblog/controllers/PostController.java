@@ -5,6 +5,7 @@ import com.codeup.springblog.models.User;
 import com.codeup.springblog.repositories.PostRepository;
 import com.codeup.springblog.repositories.UserRepository;
 import com.codeup.springblog.services.EmailService;
+import com.codeup.springblog.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -87,11 +88,14 @@ public class PostController {
     private final PostRepository postsRepository;
     private final UserRepository usersRepository;
     private final EmailService emailService;
+    private final UserService userService;
 
-    public PostController(PostRepository postsRepository, UserRepository usersRepository, EmailService emailService) {
+
+    public PostController(PostRepository postsRepository, UserRepository usersRepository, EmailService emailService, UserService userService) {
         this.postsRepository = postsRepository;
         this.usersRepository = usersRepository;
         this.emailService = emailService;
+        this.userService = userService;
     }
 
     @GetMapping("/posts")
@@ -109,7 +113,7 @@ public class PostController {
 
     @PostMapping("/posts/create")
     public String createPost(@ModelAttribute Post post) {
-        User user = usersRepository.getById(1L);
+        User user = userService.loggedInUser();
         post.setUser(user);
         Post savedPost = postsRepository.save(post);
 
@@ -134,7 +138,7 @@ public class PostController {
 
     @PostMapping("posts/{id}/edit")
     public String editPost(@PathVariable long id, @ModelAttribute Post post) {
-        User user = usersRepository.getById(1L);
+        User user = usersRepository.findAll().get(0);
         post.setUser(user);
         postsRepository.save(post);
         return "redirect:/posts";
@@ -142,7 +146,7 @@ public class PostController {
 
     @GetMapping("posts/profile")
     public String profileView(Model model) {
-        User user = usersRepository.getById(1L);
+        User user = userService.loggedInUser();
         model.addAttribute("user", user);
         model.addAttribute("posts", postsRepository.findAllByUserId(user.getId()));
         return "posts/profile";
