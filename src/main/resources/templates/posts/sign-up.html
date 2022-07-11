@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head  th:replace="partials/header :: header-links"></head>
-<body>
+<body style="text-align: center">
 <!--<nav th:replace="partials/navbar :: navbar"></nav>-->
 
 <h1>Create an account</h1>
@@ -14,8 +14,9 @@
 
     <label for="password">Password</label>
     <input id="password" type="password" th:field="*{password}" />
-
-    <input value="Sign me up!" type="submit" />
+    <div>
+        <button type="submit" class="btn btn-primary">Sign me up!</button>
+    </div>
 </form>
 
 <br/>
