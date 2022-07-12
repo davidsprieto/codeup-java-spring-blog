@@ -12,8 +12,8 @@
     <h2>Here are all your posts!</h2>
 </div>
 
-<div th:each="post : ${posts}">
-    <a th:text="${post.title}"></a>
+<div class="container" th:each="post : ${posts}">
+    <a th:text="${post.title}" th:href="@{|/posts/${post.id}|}"></a>
     <p th:text="${post.body}"></p>
 </div>
 

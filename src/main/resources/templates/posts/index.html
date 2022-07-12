@@ -9,7 +9,7 @@
 </div>
 
 <div class="container" th:each="post : ${posts}">
-    <a th:text="${post.title}" th:href="@{|/posts/${post.id}|}"></a>
+    <a th:text="${post.title}"></a>
     <p th:text="${post.body}"></p>
 </div>
 

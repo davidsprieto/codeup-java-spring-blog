@@ -10,7 +10,7 @@
 
     <!-- Spring HTML Form Utilizing Form Model Binding: -->
 <div class="container">
-    <form th:action="@{/posts/create}" th:method="post" th:object="${post}">
+    <form th:action="@{/posts/create}" th:method="POST" th:object="${post}">
         Title:
         <input th:field="*{title}" />
         <br />

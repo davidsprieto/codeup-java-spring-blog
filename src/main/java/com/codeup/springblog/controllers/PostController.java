@@ -127,13 +127,13 @@ public class PostController {
         return "posts/show";
     }
 
-    @GetMapping("posts/{id}/edit")
+    @GetMapping("/posts/{id}/edit")
     public String editPostForm(@PathVariable long id, Model model) {
         model.addAttribute("post", postsRepository.getById(id));
         return "posts/edit";
     }
 
-    @PostMapping("posts/{id}/edit")
+    @PostMapping("/posts/{id}/edit")
     public String editPost(@PathVariable long id, @ModelAttribute Post post) {
         User user = userService.loggedInUser();
         post.setUser(user);
@@ -141,12 +141,18 @@ public class PostController {
         return "redirect:/posts";
     }
 
-    @GetMapping("posts/profile")
+    @GetMapping("/posts/profile")
     public String profileView(Model model) {
         User user = userService.loggedInUser();
         model.addAttribute("user", user);
         model.addAttribute("posts", postsRepository.findAllByUserId(user.getId()));
         return "posts/profile";
+    }
+
+    @PostMapping("posts/{id}/delete")
+    public String deletePost(@PathVariable long id) {
+        postsRepository.deleteById(id);
+        return "redirect:/posts";
     }
 
 }
