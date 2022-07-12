@@ -8,10 +8,7 @@ import com.codeup.springblog.services.EmailService;
 import com.codeup.springblog.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class PostController {
@@ -138,9 +135,9 @@ public class PostController {
 
     @PostMapping("posts/{id}/edit")
     public String editPost(@PathVariable long id, @ModelAttribute Post post) {
-        User user = usersRepository.findAll().get(0);
+        User user = userService.loggedInUser();
         post.setUser(user);
-        postsRepository.save(post);
+        postsRepository.saveAndFlush(post);
         return "redirect:/posts";
     }
 
