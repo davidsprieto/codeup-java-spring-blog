@@ -49,9 +49,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 /* Pages that require authentication */
                 .and()
                 .authorizeRequests()
-                .antMatchers(
-                        "/posts/*" // only authenticated users can access every endpoint that begins with "/posts"
-                )
+                .antMatchers("/posts/*") // only authenticated users can access every endpoint that begins with "/posts"
                 .authenticated()
         ;
     }

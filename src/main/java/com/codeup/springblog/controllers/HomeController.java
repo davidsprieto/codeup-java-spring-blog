@@ -12,6 +12,12 @@ public class HomeController {
         return "posts/home";
     }
 
+//    @GetMapping("/")
+//    @ResponseBody
+//    public String landingPage() {
+//        return "<div style='text-align: center;'>This is the landing page!<div>";
+//    }
+
     // Path Variable
 //    @GetMapping("/hello/{name}")
 //    @ResponseBody

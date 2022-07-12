@@ -13,7 +13,7 @@ public class RollDiceController {
 
     @GetMapping("/roll-dice")
     public String showGuessForm() {
-        return "roll-dice";
+        return "posts/roll-dice";
     }
 
     @PostMapping("/roll-dice")
@@ -26,7 +26,7 @@ public class RollDiceController {
         } else {
             model.addAttribute("dice", "The dice rolled on " + dice + "!" + " Better luck next time!");
         }
-        return "roll-dice";
+        return "posts/roll-dice";
     }
 
 }
