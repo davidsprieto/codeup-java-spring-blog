@@ -1,8 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head  th:replace="partials/header :: header-links"></head>
 <body style="text-align: center">
-<nav th:replace="partials/navbar :: navbar"></nav>
+
+<!--    This content is only shown to UNAUTHENTICATED users.-->
+<div sec:authorize="!isAuthenticated()">
+  <nav th:replace="partials/navbar :: navbar"></nav>
+
+</div>
+
+<!--    This content is only shown to AUTHENTICATED users.-->
+<div sec:authorize="isAuthenticated()">
+  <nav th:replace="partials/navbar-logged-in :: navbar-logged-in"></nav>
+
+</div>
 
 <h1>Log In</h1>
 <div th:if="${param.error}">
