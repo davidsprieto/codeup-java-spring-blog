@@ -1,1 +1,1 @@
-# Spring Blog - Codeup Spring Blog Application to Learn the Spring Framework
+# Spring Blog - Codeup Repository for Spring Framework
